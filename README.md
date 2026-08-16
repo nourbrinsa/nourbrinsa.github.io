@@ -89,5 +89,3 @@ Use descriptive alt text rather than generic labels such as "image".
 ## Current first post
 
 `_posts/2026-08-09-breakme-tryhackme-writeup.md`
-
-The screenshots listed in the original report were not part of the uploaded files, so the post is intentionally configured to render without them. A placeholder directory and filename list are included under `assets/img/posts/breakme/README.md`.
