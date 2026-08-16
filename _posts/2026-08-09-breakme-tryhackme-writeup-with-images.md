@@ -14,7 +14,7 @@ media_subpath: /assets/img/posts/breakme
 
 **Platform:** TryHackMe  
 **Room:** Break Me  
-**Difficulty:** Hard  
+**Difficulty:** Medium  
 **Status:** In progress — paused at the `john → youcef` privilege-escalation stage.
 
 ## Executive Summary
