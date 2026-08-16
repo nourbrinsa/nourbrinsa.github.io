@@ -503,7 +503,7 @@ When the race is won, youcef's `id_rsa` private key will be printed, allowing SS
 
 | Flag | User | Value |
 |------|------|-------|
-| user1.txt | john | `5c3ea0d312568c7ac68d213785b26677` |
+| user1.txt | john | done |
 | user2.txt | youcef | pending |
 | root.txt | root | pending |
 
