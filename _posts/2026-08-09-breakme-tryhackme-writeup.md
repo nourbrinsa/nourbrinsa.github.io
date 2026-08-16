@@ -22,7 +22,7 @@ media_subpath: /assets/img/posts/breakme
 This report documents the penetration test conducted against the TryHackMe machine "Break Me." The engagement involved a full attack chain beginning with unauthenticated web enumeration, progressing through a known WordPress plugin vulnerability, and ultimately achieving remote code execution on the underlying Linux system. Lateral movement between system users was achieved through blind command injection in an internal web application. At the time of writing, the engagement is paused mid-chain at the `john → youcef` pivot, which requires exploiting a TOCTOU (Time Of Check To Time Of Use) race condition in a custom SUID binary.
 
 **Flags captured:**
-- `user1.txt` (john): `5c3ea0d312568c7ac68d213785b26677`
+- `user1.txt` (john) : Found
 - `user2.txt` (youcef): pending
 - `root.txt`: pending
 
@@ -156,7 +156,7 @@ The account `bob` was found to use the weak, common password `soccer`. The `admi
 
 **WP Data Access ≤5.3.7 — Authenticated Subscriber Privilege Escalation**
 
-The WP Data Access plugin contains a missing authorization check in its `multiple_roles_update` function. When a user updates their profile via `wp-admin/profile.php`, the plugin also processes a `wpda_role[]` POST parameter to update the user's WordPress role — without verifying whether the requesting user is permitted to change roles. This allows any authenticated user, including subscribers, to escalate themselves to administrator.
+The WP Data Access plugin contains a missing authorization check in its `multiple_roles_update` function. When a user updates their profile via `wp-admin/profile.php`, the plugin also processes a `wpda_role[]=administrator` POST parameter to update the user's WordPress role — without verifying whether the requesting user is permitted to change roles. This allows any authenticated user, including subscribers, to escalate themselves to administrator.
 
 ### Exploitation
 
@@ -346,7 +346,7 @@ curl -s -X POST http://127.0.0.1:9999/ \
 
 ```bash
 cat /home/john/user1.txt
-# 5c3ea0d312568c7ac68d213785b26677
+[REDACTED]
 ```
 
 ### Discovery — SUID Binary in youcef's Home
