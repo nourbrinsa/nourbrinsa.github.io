@@ -15,7 +15,7 @@ toc: true
 **Platform:** HackTheBox  
 **Engagement type:** Authorized black-box penetration test  
 **Tester:** nour  
-**Status:** Interim — engagement paused after root-equivalent compromise because of tester-side VPN instability  
+**Status:** Finished 
 **Overall result:** Full compromise achieved through a privileged Kubernetes pod
 
 ---
