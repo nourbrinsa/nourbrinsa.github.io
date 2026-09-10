@@ -214,8 +214,6 @@ With a username (`harry`, per the note's convention of "Linux username is my fir
 ssh harry@hogwartz-castle.thm
 ```
 
-![Generating a local SSH key pair used later for persistent access as hermonine](/assets/img/posts/madeyes-castle/generatesshforhermonine.png)
-
 ![SSH login as harry](/assets/img/posts/madeyes-castle/sshasharry.png)
 
 ```bash
@@ -223,6 +221,9 @@ cat user1.txt
 ```
 
 **User 1 flag:** `[REDACTED]`
+
+![user1.txt flag captured](/assets/img/posts/madeyes-castle/user1flag.png)
+
 
 ## Privilege Escalation — harry to hermonine
 
@@ -275,6 +276,8 @@ chmod 600 /home/hermonine/.ssh/authorized_keys
 ssh -i hermonine_key hermonine@hogwartz-castle.thm
 ```
 
+![Generating a local SSH key pair used later for persistent access as hermonine](/assets/img/posts/madeyes-castle/generatesshforhermonine.png)
+
 ![SSH login as hermonine using the injected key](/assets/img/posts/madeyes-castle/sshashermonine.png)
 
 ```bash
@@ -282,8 +285,6 @@ cat user2.txt
 ```
 
 **User 2 flag:** `[REDACTED]`
-
-![user1.txt flag captured](/assets/img/posts/madeyes-castle/user1flag.png)
 
 ## Privilege Escalation — hermonine to root
 
