@@ -1,6 +1,6 @@
 ---
 title: "Building an AI-Assisted Purple Team Lab — Part 1: Environment Setup"
-date: 2026-09-11 18:00:00 +0100
+date: 2026-09-11 10:00:00 +0100
 categories: [Personal Projects, AI-Assisted Purple Team]
 tags: [active-directory, goad, virtualbox, vagrant, ansible, ai, cybersecurity, soc, pentesting]
 ---
