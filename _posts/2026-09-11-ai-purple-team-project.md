@@ -4,9 +4,6 @@ date: 2026-09-11 18:00:00 +0100
 categories: [Personal Projects, AI-Assisted Purple Team]
 tags: [active-directory, goad, virtualbox, vagrant, ansible, ai, cybersecurity, soc, pentesting]
 pin: true
-image:
-  path: /assets/img/posts/ai-purple-team/cover.png
-  alt: AI-Assisted Purple Team Lab
 ---
 
 > **🚧 Project status: In progress.**
