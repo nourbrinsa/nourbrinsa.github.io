@@ -11,7 +11,7 @@ title: "Nour"
 tagline: "Pentesting labs, machine write-ups, and cybersecurity notes"
 description: >-
   A personal cybersecurity blog documenting authorized penetration-testing labs,
-  TryHackMe and Hack The Box machine write-ups, methodology, and lessons learned.
+  TryHackMe and Hack The Box machine write-ups, methodology, lessons learned and personal projects.
 
 url: "https://nourbrinsa.github.io"
 baseurl: ""
