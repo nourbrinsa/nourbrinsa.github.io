@@ -1,7 +1,7 @@
 ---
 title: "Madeye's Castle — TryHackMe Walkthrough"
 date: 2026-09-10
-categories: [TryHackMe, Walkthroughs]
+categories: [Writeups, TryHackMe]
 tags: [sqli, sqlite, hash-cracking, gtfobins, path-hijacking, suid, privilege-escalation]
 ---
 
