@@ -172,7 +172,7 @@ gobuster dir -u http://<TARGET_IP> -w /usr/share/wordlists/dirb/common.txt -x ph
 dirb http://<TARGET_IP>/d1r3c70ry_center
 ```
 
-![Dirb discovering the /claim/ subdirectory](dirb.png)
+![Dirb discovering the /claim/ subdirectory](secretdirectorysite.png)
 _Dirb finding the `/claim/` subdirectory inside `d1r3c70ry_center`._
 
 Dirb discovered:
@@ -187,7 +187,7 @@ http://<TARGET_IP>/d1r3c70ry_center/claim/
 
 The `/claim/` directory contained `index.php` with a `?view=` parameter that loaded files by name (e.g. `?view=flower.gif`). This is a classic LFI pattern.
 
-![The /claim/ page showing the ?view= parameter](secretdirectorysite.png)
+![The /claim/ page showing the ?view= parameter](dirb.png)
 _The claim page with the vulnerable `?view=` parameter visible in the status bar._
 
 A direct traversal attempt was blocked by a server-side filter:
